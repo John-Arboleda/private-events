@@ -12,6 +12,25 @@
 
   <body>
 
+  <nav class="navbar navbar-expand-md navbar-dark bg-dark">
+    <%= link_to "Private Events", root_path, class: "navbar-brand ms-4 link-dark" %>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="ms-auto d-flex">
+      <% if current_user %>
+        <%= link_to "Create event", new_event_path, class: "btn btn-md btn-primary" %>
+          Logged in as <%= link_to current_user.username, user_path(current_user) %>
+        <%= link_to "Log Out", logout_path, class: "btn btn-md btn-primary ms-3 me-5" %>
+      <% else %>
+        <%= link_to "Sign Up", signup_path, class: "btn btn-md btn-primary" %>
+        <%= link_to "Log In", login_path, class: "btn btn-md btn-primary ms-3 me-5" %>
+      <% end %>
+    </div> %>
+  </nav>
+
+
   <% if flash[:notice] %>
     <div class="alert alert-info" role="alert">
       <p class="notice"><%= notice %></p>
@@ -22,26 +41,6 @@
       <p class="alert"><%= alert %></p>
     </div>
   <% end %>
-
-  <nav class="navbar navbar-expand-sm navbar-dark fixed-top bg-dark">
-    <a class="navbar-brand ms-4" href="/">Private Events</a>
-    <%# <%= link_to "Home", root_path %>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-
-    <div class="ms-auto d-flex">
-      <% if current_user %>
-        <%= link_to "Create event", new_event_path %>
-          Logged in as <%= link_to current_user.username, user_path(current_user) %>
-        <%= link_to "Log Out", logout_path %>
-      <% else %>
-        <%= link_to "Sign Up", signup_path %> or
-        <%= link_to "Log In", login_path %>
-      <% end %>
-    </div>
-  </nav>
-
   <%= yield %>
   </body>
 </html>

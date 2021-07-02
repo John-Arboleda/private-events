@@ -22,14 +22,14 @@
     <div class="ms-auto d-flex">
       <% if user_signed_in? %>
 
-        <%# link_to current_user.username, edit_user_registration_path, class: "btn btn-md btn-primary" %>
-        <div class="text-primary">
-          Logged in as <%= link_to current_user.username, user_path(current_user) %>
-        </div>
+        <%= link_to "#{current_user.username} profile", user_path(current_user), class: "btn btn-md btn-primary" %>
+        
+        <%= link_to 'Create event', new_event_path, class: "btn btn-md btn-primary ms-3" %>
 
-        <%= link_to 'Logout', destroy_user_session_path, class: "btn btn-md btn-primary ms-3 me-5" %>
+        <%= link_to 'Logout', destroy_user_session_path, :method => :delete, class: "btn btn-md btn-danger ms-3 me-5" %>
       
       <% else %>
+
         <%= link_to 'Sign In', new_user_session_path, class: "btn btn-md btn-primary" %>
 
         <%= link_to 'Sign Up', new_user_registration_path, class: "btn btn-md btn-primary ms-3 me-5" %>

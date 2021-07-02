@@ -20,7 +20,7 @@ class EventsController < ApplicationController
       flash[:success] = "Event '#{@event.name}' created!"
       redirect_to @event
     else
-      flash[:alert] = "Some error!"
+      flash[:alert] = 'Some error!'
       render 'new'
     end
   end

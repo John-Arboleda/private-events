@@ -5,11 +5,10 @@ class SubscriptionsController < ApplicationController
 
     if subscription.save
       flash[:notice] = "You have signed up for the #{event.name}. Thank you!"
-      redirect_to event_path(event)
     else
       flash[:alert] = 'Ooops! Something went wrong...'
-      redirect_to event_path(event)
     end
+    redirect_to event_path(event)
   end
 
   def destroy

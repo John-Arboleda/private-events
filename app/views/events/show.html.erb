@@ -6,8 +6,8 @@
 <h2 class="text-center text-primary"><%= @event.name %></h2>
 
   <p class="text-white"><%= @event.description %></p>
-  <p class="text-secondary">Location: <span class="text-white"><%= @event.location%></span></p>
-  <p class="text-secondary">Date:<span class="text-white"><%= @event.date%></span></p>
+  <p class="text-secondary">Location: <span class="text-white"><%= @event.location %></span></p>
+  <p class="text-secondary">Date:<span class="text-white"><%= @event.date %></span></p>
 
   <h6 class="text-white">Hosted by <%= @event.creator.username %></h6>
   <div class="dropdown">
@@ -25,15 +25,13 @@
   </ul>
 </div>
 
-  <% if @event.creator == current_user %>
-    <%= button_to "Invite", root_path,  class: "button is-info is-large is-fullwidth" %>
-  <% elsif @event.attendees.exists?(id: current_user) %>
-    <%= button_to "Cancel enrollment", subscription_path(event_id: @event.id), method: :delete, class: "button is-danger is-large is-fullwidth" %>
+  <% if @event.attendees.exists?(id: current_user) %>
+    <%= button_to "Cancel", subscription_path(event_id: @event.id), method: :delete, class: "btn btn-danger" %>
   <% else %>
-    <%= button_to "Enroll", subscriptions_path(event_id: @event.id, user_id: current_user), class: "button is-primary is-large is-fullwidth" %>
+    <%= button_to "Subscribe", subscriptions_path(event_id: @event.id, user_id: current_user), class: "btn btn-primary" %>
   <% end %>
 
-  <%= link_to 'Back', :back, class: "button is-fullwidth" %>
+  <%= link_to 'Back', :back, class: "btn btn-primary" %>
 
 </div>
 </div>

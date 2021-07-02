@@ -1,14 +1,9 @@
 Rails.application.routes.draw do
-  devise_for :users
+  devise_for :users, controllers: {registrations: 'registrations', sessions: 'sessions'}
   
   root 'events#index'
 
-  get 'signup' => 'users#new', as: 'signup'
-  get 'login' => 'sessions#new', as: 'login'
-  get 'logout' => 'sessions#destroy', as: 'logout'
-
-  resources :users
-  resources :sessions, only: [:new, :create, :destroy]
+  resources :users, only: [:index, :show]
   resources :events
   resources :subscriptions, only: [:create, :destroy]
 end

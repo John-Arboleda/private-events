@@ -1,31 +1,39 @@
-<h1>Events#show</h1>
 
-Event name: <strong><%= @event.name %></strong>
-</p>
+<div class="my-5 d-flex justify-content-center">
 
-<p>
-by <small><strong><%= @event.creator.name %></strong></small>
-</p>
+<div class="px-3 py-4 bg-dark border rounded-3 col-3">
+  
+<h2 class="text-center text-primary"><%= @event.name %></h2>
 
-<p>
-Attendees: <strong><%= @event.attendees.count %></strong>
-</p>
+  <p class="text-white"><%= @event.description %></p>
+  <p class="text-secondary">Location: <span class="text-white"><%= @event.location%></span></p>
+  <p class="text-secondary">Date:<span class="text-white"><%= @event.date%></span></p>
 
-<p>
-<% if @event.attendees.any? %>
-  <% @event.attendees.each do |attendee| %>
-    <strong><%= attendee.name %></strong>
+  <h6 class="text-white">Hosted by <%= @event.creator.username %></h6>
+  <div class="dropdown">
+  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+    Attendies: <%= @event.attendees.count %>
+  </button>
+  <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+    <% if @event.attendees.any? %>
+      <div class="dropdown-item">
+        <% @event.attendees.each do |attendee| %>
+          <li><p><%= attendee.username %></p></li>
+        <% end %>
+      </div>
+    <% end %>
+  </ul>
+</div>
+
+  <% if @event.creator == current_user %>
+    <%= button_to "Invite", root_path,  class: "button is-info is-large is-fullwidth" %>
+  <% elsif @event.attendees.exists?(id: current_user) %>
+    <%= button_to "Cancel enrollment", subscription_path(event_id: @event.id), method: :delete, class: "button is-danger is-large is-fullwidth" %>
+  <% else %>
+    <%= button_to "Enroll", subscriptions_path(event_id: @event.id, user_id: current_user), class: "button is-primary is-large is-fullwidth" %>
   <% end %>
-<% end %>
-</p>
 
-<br/>
-<% if @event.creator == current_user %>
-  <%= button_to "Invite" %>
-<% elsif @event.attendees.exists?(id: current_user.id) %>
-  <p>You're already attending this event</p>
-  <%= button_to "Cancel enrollment", enrollment_path(event_id: @event.id), method: :delete %>
-<% else %>
-  <%= button_to "Enroll", enrollments_path(event_id: @event.id, user_id: current_user.id) %>
-<% end %>
-<%= link_to 'Back', :back %>
+  <%= link_to 'Back', :back, class: "button is-fullwidth" %>
+
+</div>
+</div>

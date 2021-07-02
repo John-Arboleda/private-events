@@ -1,29 +1,48 @@
+
+<div class="my-5 d-flex justify-content-center">
+<div class="px-3 py-4 bg-dark border rounded-3 col-3">
+
 <%= form_with(model: event, local: true) do |f| %>
   <div class="field">
-    <%= f.label :name %>
-    <%= f.text_field :name %>
+    <div class="control">
+      <%= f.label :name, class: "text-white" %>
+      <%= f.text_field :name, autofocus: true %>
+    </div>
   </div>
 
   <div class="field">
-    <%= f.label :date %>
-    <%= f.date_select :date %>
+    <div class="control">
+      <%= f.label :date, class: "text-white" %>
+      <%= f.date_select :date, type: "date" %>
+    </div>
   </div>
 
   <div class="field">
-    <%= f.label :location %>
-    <%= f.text_field :location %>
+    <div class="control">
+      <%= f.label :location, class: "text-white" %>
+      <%= f.text_field :location, class: "input", autofocus: true %>
+    </div>
   </div>
 
   <div class="field">
-    <%= f.label :description %>
-    <%= f.text_field :description %>
+    <div class="control">
+      <%= f.label :description, class: "text-white" %>
+      <%= f.text_field :description, class: "textarea", autofocus: true %>
+    </div>
   </div>
 
-  <div class="actions">
-    <%= f.submit 'Create event' %>
+  <div class="field">
+    <div class="control">
+      <%= f.submit "Create Event", class:"btn btn-primary" %>
+    </div>
   </div>
 
-  <div class="actions">
-    <%= link_to 'Cancel', root_path %>
+  <div class="field">
+    <div class="control">
+      <%= link_to 'Cancel', root_path, class:"btn btn-primary" %>
+    </div>
   </div>
 <% end %>
+
+</div>
+</div>

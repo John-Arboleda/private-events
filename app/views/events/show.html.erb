@@ -7,29 +7,32 @@
 
   <p class="text-white"><%= @event.description %></p>
   <p class="text-secondary">Location: <span class="text-white"><%= @event.location %></span></p>
-  <p class="text-secondary">Date:<span class="text-white"><%= @event.date %></span></p>
+  <p class="text-secondary">Date: <span class="text-white"><%= @event.date %></span></p>
 
-  <h6 class="text-white">Hosted by <%= @event.creator.username %></h6>
-  <div class="dropdown">
+<h6 class="text-white">Hosted by <%= link_to @event.creator.username, user_path(@event.creator) %></h6>
+
+<div class="d-flex justify-content-between my-2">
+
+<% if @event.attendees.exists?(id: current_user) %>
+  <%= button_to "Unsubscribe", subscription_path(event_id: @event.id), method: :delete, class: "btn btn-danger" %>
+<% else %>
+  <%= button_to "Subscribe", subscriptions_path(event_id: @event.id, user_id: current_user), class: "btn btn-success" %>
+<% end %>
+
+<div class="dropdown">
   <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
     Attendies: <%= @event.attendees.count %>
   </button>
   <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
     <% if @event.attendees.any? %>
-      <div class="dropdown-item">
-        <% @event.attendees.each do |attendee| %>
-          <li><p><%= attendee.username %></p></li>
-        <% end %>
-      </div>
+      <% @event.attendees.each do |attendee| %>
+        <li><%= link_to "#{attendee.username}", user_path(attendee), class: "dropdown-item" %></li>
+      <% end %>
     <% end %>
   </ul>
 </div>
 
-  <% if @event.attendees.exists?(id: current_user) %>
-    <%= button_to "Cancel", subscription_path(event_id: @event.id), method: :delete, class: "btn btn-danger" %>
-  <% else %>
-    <%= button_to "Subscribe", subscriptions_path(event_id: @event.id, user_id: current_user), class: "btn btn-primary" %>
-  <% end %>
+</div>
 
   <%= link_to 'Back', :back, class: "btn btn-primary" %>
 

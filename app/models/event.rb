@@ -4,4 +4,5 @@ class Event < ApplicationRecord
   has_many :attendees, through: :subscriptions, source: :user
   scope :past, -> { where('date < ?', Date.today) }
   scope :upcoming, -> { where('date >= ?', Date.today) }
+  validates :name, :description, :location, presence: true
 end

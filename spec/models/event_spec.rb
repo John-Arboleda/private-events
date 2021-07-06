@@ -17,7 +17,8 @@ RSpec.describe Event, type: :model do
       description: 'This is my first event',
       date: '2021-12-24',
       location: 'Earth',
-      user_id: 5)
+      user_id: 5
+    )
   end
 
   it 'valid event with all required fields' do

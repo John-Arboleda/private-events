@@ -14,7 +14,6 @@ RSpec.describe User, type: :feature do
   end
 
   it 'Sign up with invalid inputs' do
-
     visit 'users/sign_up'
     fill_in 'user[username]', with: ''
     fill_in 'user[email]', with: 'LeBron-James'

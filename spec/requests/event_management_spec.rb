@@ -23,7 +23,7 @@ RSpec.describe 'Create Event', type: :feature do
     click_on 'Log in'
     sleep(1)
     visit new_event_path
-    #fill_in 'Name', with: ''
+    # fill_in 'Name', with: ''
     fill_in 'Description', with: ''
     fill_in 'Location', with: 'USA'
     click_on 'Create Event'
@@ -32,10 +32,9 @@ RSpec.describe 'Create Event', type: :feature do
 end
 
 RSpec.describe 'Subscribe to event', type: :feature do
-
   let(:creator) { User.create(id: 1, username: 'LeBron-James', email: 'lbj@gmail.com', password: '123456') }
   let(:user) { User.create(id: 2, username: 'John', email: 'john@gmail.com', password: '123456') }
-  
+
   scenario 'Subscribe to an event' do
     visit new_user_session_path
     fill_in 'Email', with: creator.email

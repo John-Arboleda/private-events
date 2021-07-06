@@ -42,7 +42,7 @@ group :development, :test do
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
   # Rspec Testing
   gem 'database_cleaner', '~> 2.0', '>= 2.0.1'
-  gem "rspec-rails"
+  gem 'rspec-rails'
 end
 
 group :development do
@@ -59,9 +59,9 @@ end
 group :test do
   # Adds support for Capybara system testing and selenium driver
   gem 'capybara', '>= 3.26'
+  gem 'database_cleaner_2', '~> 2.1'
   gem 'selenium-webdriver'
   gem 'shoulda-matchers'
-  gem 'database_cleaner_2', '~> 2.1'
   # Easy installation and use of web drivers to run system tests with browsers
   gem 'webdrivers'
 end

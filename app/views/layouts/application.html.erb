@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>PrivateEvents</title>
+    <title>Private Events</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
@@ -11,6 +11,43 @@
   </head>
 
   <body>
-    <%= yield %>
+
+  <nav class="navbar navbar-expand-md navbar-dark bg-dark">
+    <%= link_to "Private Events", root_path, class: "navbar-brand ms-4 link-dark" %>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+
+    <div class="ms-auto d-flex">
+      <% if user_signed_in? %>
+
+        <%= link_to "#{current_user.username} profile", user_path(current_user), class: "btn btn-md btn-primary" %>
+        
+        <%= link_to 'Create event', new_event_path, class: "btn btn-md btn-primary ms-3" %>
+
+        <%= link_to 'Logout', destroy_user_session_path, :method => :delete, class: "btn btn-md btn-danger ms-3 me-5" %>
+      
+      <% else %>
+
+        <%= link_to 'Sign In', new_user_session_path, class: "btn btn-md btn-primary" %>
+
+        <%= link_to 'Sign Up', new_user_registration_path, class: "btn btn-md btn-primary ms-3 me-5" %>
+      <% end %>
+    </div>
+  </nav>
+
+
+  <% if flash[:notice] %>
+    <div class="alert alert-info" role="alert">
+      <p class="notice"><%= notice %></p>
+    </div>
+  <% end %>
+  <% if flash[:alert] %>
+    <div class="alert alert-danger" role="alert">
+      <p class="alert"><%= alert %></p>
+    </div>
+  <% end %>
+  <%= yield %>
   </body>
 </html>

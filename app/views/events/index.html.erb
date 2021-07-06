@@ -1,0 +1,50 @@
+
+<h2>Upcoming Events</h2>
+
+<div class="row">
+  <% Event.upcoming.each do |event| %>
+    <div class="p-2 col-sm-6 col-lg-4">
+      <div class="card">
+        <header class="card-header">
+          <%= link_to event.name, event_path(event)%>
+        </header>
+        <div class="card-body">
+          <blockquote class="blockquote mb-0">
+            <p><%= event.description.truncate_words(20) %></p>
+            <footer class="blockquote-footer">
+              <p>Date: <%= event.date %></p>
+              <p>At: <%= event.location %></p>
+              <p>By: <%= event.creator.username %></p>
+            </footer>
+          </blockquote>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>
+
+<br/>
+
+<h2>Past Events</h2>
+
+<div class="row">
+  <% Event.past.each do |event| %>
+    <div class="p-2 col-sm-6 col-lg-4">
+      <div class="card">
+        <header class="card-header">
+          <%= link_to event.name, event_path(event)%>
+        </header>
+        <div class="card-body">
+          <blockquote class="blockquote mb-0">
+            <p><%= event.description.truncate_words(20) %></p>
+            <footer class="blockquote-footer">
+              <p>Date: <%= event.date %></p>
+              <p>At: <%= event.location %></p>
+              <p>By: <%= event.creator.username %></p>
+            </footer>
+          </blockquote>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>
